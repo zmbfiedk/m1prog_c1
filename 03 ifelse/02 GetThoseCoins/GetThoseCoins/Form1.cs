@@ -103,14 +103,33 @@ namespace GetThoseCoins
 
             //1) als lDown true is dan voer je de code hieronder uit (in de  {} van de if)
             //player.x -= 112.5f * frametime;
-          
+            if (lDown)
+            {
+                player.x -=112.5f * frametime;
+            }
+
 
             //2) als rDown true is dan voer je de code hieronder uit (in de  {} van de if)
             //player.x += 112.5f * frametime;
-            
-
+            if (rDown)
+            {
+                player.x += 112.5f * frametime;
+            }
             //4) de speler kan nog buiten het scherm komen!!! los dat met een if op.
             // zet bijvoorbeeld de speler x weer terug op size of op het eind van het scherm (size*8)
+            // Assuming 'size' is the unit for player movement, and 'size * 8' is the screen width
+if (player.x < size) // If player goes beyond the left edge
+{
+    player.x = size; // Set player.x back to the left edge
+}
+else if (player.x > size * 8) // If player goes beyond the right edge
+{
+    player.x = size * 8; // Set player.x back to the right edge
+}
+
+            
+            
+            
             SpawnCoins();
             HandleCoinLogic(frametime);
         }
@@ -129,7 +148,15 @@ namespace GetThoseCoins
                 // - gebruik je de code hieronder in de {} van de if
                 //          coins.Remove(coin);
                 // - tel je 1 bij de score op
-               
+                float distanceThreshold = 25.0f;
+
+                if (distToPlayer < distanceThreshold)
+                {
+                    coins.Remove(coin); 
+                    score += 1;         
+                }
+
+
             }
             coins.RemoveAll(coin => coin.y < -10);
         }
@@ -149,6 +176,11 @@ namespace GetThoseCoins
                 nextCoin = DateTime.Now.AddMilliseconds(250 + r.Next(100));
                 coins.Add(new Square() { x = size + r.Next(size * 7), y = size * 10, color = Brushes.Yellow });
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

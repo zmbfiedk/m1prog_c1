@@ -23,18 +23,18 @@ namespace IntroChangeVariableValues
 
             characterName = character1;
             currentTime= DateTime.Now;
-            myFavoriteCity = ???; //geef hier myFavoriteCity een waarde 
-            myFavoriteNumber = ???; //geef hier myFavoriteNumber een waarde 
-            displayNumber = ???; //zet displayNumber op true
+            myFavoriteCity = "Sumidouro"; //geef hier myFavoriteCity een waarde 
+            myFavoriteNumber = 758;
+            displayNumber = true;
             Display();
 
             //nu gaan we de waarden instellen voor luigi, gebruik andere waardes
 
-            characterName = ???;
-            currentTime = ???;//zoek op hoe je de huidige tijd kan krijgen (DateTime.???)
-            myFavoriteCity = ???; //geef hier myFavoriteCity een waarde 
-            myFavoriteNumber = ???; //geef hier myFavoriteNumber een waarde 
-            displayNumber = ???; //zet displayNumber op false
+            characterName = "Arthur";
+            currentTime = DateTime.Now;
+            myFavoriteCity = "sumidour";
+            myFavoriteNumber = 7;
+            displayNumber = true;
             Display();
         }
 

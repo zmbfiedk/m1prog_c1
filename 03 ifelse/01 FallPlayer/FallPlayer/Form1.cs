@@ -73,20 +73,24 @@ namespace SquareCommand
                 return;
             }
             //1) maak hieronder een variable:
+            int ground= 7* size;
             //- type: int
             //- naam: ground
             //- met de waarde van 7 keer size
 
             //2) maak hieronder een variable:
+           float playerBottom = player.y + size;
+
             //- type: float
             //- naam: playerBottom
             //- met de waarde van player.y plus size
-            
+
 
             //3) gebruik een If om te kijken of de playerBottom < ground
             // dan mag je de player bewegen, anders niet!
+            if (playerBottom < ground)
 
-                player.y += 0.5f;
+            player.y += 0.5f;
         }
     }
 }

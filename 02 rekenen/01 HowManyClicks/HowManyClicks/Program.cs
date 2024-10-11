@@ -10,7 +10,10 @@ namespace HowManyClicks
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.SetHighDpiMode(HighDpiMode.SystemAware);
+            Application.SetDefaultFont(new Font(new FontFamily("Microsoft Sans Serif"), 8.25f));
             Application.Run(new Form1());
         }
     }

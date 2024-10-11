@@ -17,19 +17,19 @@ namespace UpAndDown
         {
             if (e.KeyCode == Keys.Space)
             {
-                //1) tel hieronder 1 bij de score op
+                score += 1;
             }
             if (e.KeyCode == Keys.E)
             {
-                //2) tel hieronder 5 bij de score op
+                score += 5;
             }
             if (e.KeyCode == Keys.W)
             {
-                //3) tel hier zelf iets bij de score op
+                score += 10;
             }
             if (e.KeyCode == Keys.Delete)
             {
-                //4) haal hieronder iets van de score af
+                score += -3;
             }
         }
 
@@ -44,6 +44,11 @@ namespace UpAndDown
 
         public void DoLogic(float frametime)
         {
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

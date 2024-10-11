@@ -1,4 +1,8 @@
 
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+
 namespace MovePlayer
 {
     public partial class Form1 : Form
@@ -6,8 +10,10 @@ namespace MovePlayer
         private const int size = 16;
         Square player = new Square();
         float playerSpeed = 100;
-        //0)
+
         bool left, right, down, up;
+        private Timer gameTimer;
+        private DateTime lastFrameTime;
 
         public Form1()
         {
@@ -16,74 +22,82 @@ namespace MovePlayer
 
             KeyDown += Form1_KeyDown;
             KeyUp += Form1_KeyUp;
+
             player.x = 10;
             player.y = 10;
             player.color = Brushes.Red;
 
+            
+            gameTimer = new Timer();
+            gameTimer.Interval = 16; 
+            gameTimer.Tick += GameLoop;
+            gameTimer.Start();
+
+            lastFrameTime = DateTime.Now;
+        }
+
+        private void GameLoop(object sender, EventArgs e)
+        {
+            float frametime = (float)(DateTime.Now - lastFrameTime).TotalSeconds;
+            lastFrameTime = DateTime.Now;
+            DoLogic(frametime);
+            Invalidate(); 
         }
 
         private void Form1_KeyUp(object? sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.W)
-            {
-                up = false;
-            }
-            if (e.KeyCode == Keys.S)
-            {
-                down = false;
-            }
-            if (e.KeyCode == Keys.A)
-            {
-                left = false;
-            }
-            if (e.KeyCode == Keys.D)
-            {
-                right = false;
-            }
+            if (e.KeyCode == Keys.W) up = false;
+            if (e.KeyCode == Keys.S) down = false;
+            if (e.KeyCode == Keys.A) left = false;
+            if (e.KeyCode == Keys.D) right = false;
         }
 
         private void Form1_KeyDown(object? sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.W)
-            {
-                up = true;
-            }
-            if (e.KeyCode == Keys.S)
-            {
-                down = true;
-            }
-            if (e.KeyCode == Keys.A)
-            {
-                left = true;
-            }
-            if (e.KeyCode == Keys.D)
-            {
-                right = true;
-            }
-
+            if (e.KeyCode == Keys.W) up = true;
+            if (e.KeyCode == Keys.S) down = true;
+            if (e.KeyCode == Keys.A) left = true;
+            if (e.KeyCode == Keys.D) right = true;
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-
             Graphics g = e.Graphics;
-
-
             g.Clear(Color.Black);
-            g.FillRectangle(player.color, player.x , player.y , size, size);
+            g.FillRectangle(player.color, player.x, player.y, size, size);
         }
 
         internal void DoLogic(float frametime)
         {
-            //1) je ziet hieronder de code voor het bewegen van de speler.
-            // - zorg ervoor dat je TEST (if) of de speler een richting in moet bewegen (bv of up true is)
-            // - dan in de {} van die if zet je de de JUISTE code van hieronder.
-            // - let op, je moet soms de += en soms de -= gebruiken!
+            if (up)
+            {
+                player.y -= playerSpeed * frametime; 
+            }
+            if (down)
+            {
+                player.y += playerSpeed * frametime; 
+            }
+            if (left)
+            {
+                player.x -= playerSpeed * frametime; 
+            }
+            if (right)
+            {
+                player.x += playerSpeed * frametime; 
+            }
 
-            //player.x += playerSpeed * frametime;
-            //player.y += playerSpeed * frametime;
-
+            player.x = Math.Max(0, Math.Min(player.x, this.ClientSize.Width - size));
+            player.y = Math.Max(0, Math.Min(player.y, this.ClientSize.Height - size));
+        
         }
+    }
+
+    
+    public class Square
+    {
+        public float x;
+        public float y;
+        public Brush color;
     }
 }

@@ -1,4 +1,3 @@
-
 namespace Endless
 {
     public partial class Form1 : Form
@@ -27,16 +26,15 @@ namespace Endless
                 "#..............#",
                 "#..............#",
                 "################",
-            ]
-        , size
-            );
+            ], size
+        );
 
         public Form1()
         {
             InitializeComponent();
             DoubleBuffered = true;
 
-            player.x = size*3;
+            player.x = size * 3;
             player.y = size;
 
             KeyDown += Form1_KeyDown;
@@ -65,7 +63,6 @@ namespace Endless
 
         private void Form1_KeyDown(object? sender, KeyEventArgs e)
         {
-
             if (e.KeyCode == Keys.W)
             {
                 up = true;
@@ -101,21 +98,34 @@ namespace Endless
 
         public void DoLogic(float frametime)
         {
-            //2) zorg hier nu dat zowel de x als de y bestuurd kunnen worden
-
+            
             if (up)
             {
                 player.y -= speed;
             }
             if (down)
             {
+                player.y += speed;
             }
             if (left)
             {
+                player.x -= speed;
             }
             if (right)
             {
+                player.x += speed;
             }
+
+            
+            if (player.x < 0)
+                player.x = (byte)(ClientSize.Width / size - 1); 
+            else if (player.x >= ClientSize.Width / size)
+                player.x = 0; 
+
+            if (player.y < 0)
+                player.y = (byte)(ClientSize.Height / size - 1); 
+            else if (player.y >= ClientSize.Height / size)
+                player.y = 0; 
         }
     }
 }

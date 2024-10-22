@@ -9,11 +9,11 @@ namespace SelectYourPower
         private readonly Image image;
         const int spriteSize = 16;
 
-        //UITLEG: deze rectangle geeft aan welk stuk van het plaatje `sprites.png` getekend wordt, probeer het maar aan te passen!
+        // UITLEG: deze rectangle geeft aan welk stuk van het plaatje `sprites.png` getekend wordt, probeer het maar aan te passen!
         Rectangle frame = new Rectangle(5, 3, spriteSize * 2, spriteSize);
         Rectangle coin = new Rectangle(8, 26, spriteSize, spriteSize);
 
-        //UITLEG: elk punt is 1 plek waar we mario willen tekenen
+        // UITLEG: elk punt is 1 plek waar we mario willen tekenen
         Square player = new Square(50, 50, spriteSize * 2, spriteSize);
 
         List<Square> pickups = new List<Square>();
@@ -23,7 +23,6 @@ namespace SelectYourPower
         private const int size = 16;
         float playerSpeed = 50;
         float nextPickup = 1;
-
 
         public Form1()
         {
@@ -45,25 +44,25 @@ namespace SelectYourPower
 
         private void SelectPowerUp()
         {
-            //1) reset de powerCount variable naar -1
-            powerCount = ???;
+            // 1) reset de powerCount variable naar -1
+            powerCount = -1; // Reset powerCount to -1
         }
 
         private void PowerAdded()
         {
-            //2) tel 1 bij de powerCount op;
-            powerCount ???;
+            // 2) tel 1 bij de powerCount op;
+            powerCount++; // Increment powerCount by 1
 
-            //3) check of de powerCount waarde groter is dan de powerups lengte min 1
-            if (powerCount > ???)
+            // 3) check of de powerCount waarde groter is dan de powerups lengte min 1
+            if (powerCount >= powerUps.Length - 1) // Check if powerCount is greater than the max index
             {
-                powerCount = 0;
+                powerCount = 0; // Reset powerCount to 0 if it exceeds
             }
         }
-     
+
         private void Form1_FormClosing(object? sender, FormClosingEventArgs e)
         {
-            //opruimen
+            // opruimen
             image.Dispose();
         }
 
@@ -89,12 +88,11 @@ namespace SelectYourPower
             int x = 0;
             for (int i = 0; i < powerUps.Length; i++)
             {
-                //4) maak dit af, zorg dat je de huidige powerUp string pakt uit powerUps, gebruik i
-                string powerUp = powerUps???;
+                // 4) maak dit af, zorg dat je de huidige powerUp string pakt uit powerUps, gebruik i
+                string powerUp = powerUps[i]; // Get the current powerUp string from powerUps array
 
                 SizeF sizeF = g.MeasureString(powerUp, Font);
                 g.DrawString(powerUp, Font, Brushes.White, x, 100);
-
 
                 if (powerCount == i)
                 {
@@ -113,10 +111,10 @@ namespace SelectYourPower
         {
             for (int i = pickups.Count - 1; i >= 0; i--)
             {
-                //5) maak dit af, zorg dat je de huidige pickup Square pakt uit pickups, gebruik i
-                Square pickup = ???;
+                // 5) maak dit af, zorg dat je de huidige pickup Square pakt uit pickups, gebruik i
+                Square pickup = pickups[i]; // Get the current pickup Square from pickups list
                 pickup.x += -playerSpeed * frametime;
-                if (pickup.x < player.x + player.h)//picked up by player 
+                if (pickup.x < player.x + player.h) // picked up by player 
                 {
                     PowerAdded();
                     pickups.RemoveAt(i);

@@ -28,16 +28,19 @@ namespace MenuDraw
         {
             base.OnPaint(e);
             e.Graphics.Clear(Color.Black);
-            //1) maak hier een for loop, die over menu loopt
+
+            // Loop through each menu item and draw it
+            for (int i = 0; i < menu.Length; i++)
             {
-			//2) haal de // hieronder weg zodat de code gaat werken
-				//GameMenuItem menuItem = menu[i];
-                //menuItem.Draw(e.Graphics);
+                GameMenuItem menuItem = menu[i];  // Access the menu item
+                menuItem.Draw(e.Graphics);         // Draw the menu item
             }
         }
 
         public void DoLogic(float frametime)
         {
+            // Logic for your game can be added here
         }
     }
 }
+

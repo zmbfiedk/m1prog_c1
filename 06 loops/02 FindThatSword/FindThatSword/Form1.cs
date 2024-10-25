@@ -11,36 +11,45 @@ namespace MenuDraw
             InitializeComponent();
             DoubleBuffered = true;
 
+            
             inventory = new Equipment[]
             {
-                new Equipment("The minotaur",EquipmentType.Axe),
-                new Equipment("The Grandfather",EquipmentType.Sword),
-                new Equipment("corpsemourn",EquipmentType.ChestArmor),
-                new Equipment("immortal kings pillar",EquipmentType.LegArmor)
+                new Equipment("The minotaur", EquipmentType.Axe),
+                new Equipment("The Grandfather", EquipmentType.Sword),
+                new Equipment("corpsemourn", EquipmentType.ChestArmor),
+                new Equipment("immortal kings pillar", EquipmentType.LegArmor)
+           
             };
-
+       
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            base.OnPaint(e);
-            e.Graphics.Clear(Color.Black);
-            //1) maak hier een for loop, die over inventory loopt
             
-            {
+            base.OnPaint(e);
+           
+            e.Graphics.Clear(Color.Black);
 
-                //2) haal hier het item op [i] op, zie MenuDraw als je het even niet weet
-                Equipment item = ;
-                if ()//3) test hier of item.type GELIJK is aan EquipmentType.Sword
+
+            
+            for (int i = 0; i < inventory.Length; i++)
+            {
+                
+                Equipment item = inventory[i];
+
+                
+                if (item.Type == EquipmentType.Sword || item.Type == EquipmentType.Axe)
                 {
-                    e.Graphics.DrawImage(item.image, 0, 0);
+                    e.Graphics.DrawImage(item.Image, 0, i * 50);
                 }
             }
         }
 
         internal void DoLogic(float frametime)
         {
-            //gebruiken we nu even niet
+            // Not used currently
         }
     }
 }
+
+

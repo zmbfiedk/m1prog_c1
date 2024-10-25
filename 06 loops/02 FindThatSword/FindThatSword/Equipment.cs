@@ -14,5 +14,7 @@ namespace MenuDraw
             this.image = new Bitmap(name + ".PNG");
         }
 
+        public EquipmentType Type { get; internal set; }
+        public Image Image { get; internal set; }
     }
 }

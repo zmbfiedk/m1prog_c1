@@ -10,7 +10,8 @@ namespace SquareCommand
         int step = 0;
 
         Level level = new Level(
-            [
+            new string[]
+            {
                 "##########",
                 "#P...#...#",
                 "#.####...#",
@@ -21,9 +22,8 @@ namespace SquareCommand
                 "#.#####..#",
                 "#......E##",
                 "##########",
-            ]
-
-            );
+            }
+        );
         private bool done;
 
         public Form1()
@@ -39,17 +39,25 @@ namespace SquareCommand
             endGoal.x = level.goal.X;
             endGoal.y = level.goal.Y;
 
-            // 1) vervang de ???? met 1 van de 4 Move functions van player
-            // voorbeeld: player.MoveRight(level)
-
-            //2) zorg dat je de speler bij het einde komt! ( waar de E staat!)
-            steps = [
-
-                ()=>????,
-                ()=>????,
-                // je kan de regel hierboven kopieeren en plakken als je meer stappen nodig hebt
-            ];
-
+            steps = new Action[]
+            {
+                () => player.MoveRight(level),
+                () => player.MoveRight(level),
+                () => player.MoveRight(level),
+                () => player.MoveRight(level),
+                () => player.MoveDown(level),
+                () => player.MoveDown(level),
+                () => player.MoveDown(level),
+                () => player.MoveDown(level),
+                () => player.MoveDown(level),
+                () => player.MoveDown(level),
+                () => player.MoveRight(level),
+                () => player.MoveRight(level),
+                () => player.MoveRight(level),
+                () => player.MoveRight(level),
+                () => player.MoveRight(level),
+                () => player.MoveRight(level),
+            };
         }
 
         private void Form1_KeyDown(object? sender, KeyEventArgs e)
@@ -58,17 +66,16 @@ namespace SquareCommand
             {
                 return;
             }
-                if (e.KeyCode == Keys.Space)
+            if (e.KeyCode == Keys.Space)
             {
                 if (step < steps.Length)
                 {
-                    steps[step]();
+                    stepsstep;
                     step++;
                     if (player.x == endGoal.x && player.y == endGoal.y)
                     {
-                        done= true;
+                        done = true;
                     }
-
                 }
             }
             Invalidate();
@@ -77,7 +84,6 @@ namespace SquareCommand
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-
 
             foreach (Tile[] row in level.tiles)
             {
@@ -88,7 +94,6 @@ namespace SquareCommand
 
                 e.Graphics.FillRectangle(player.color, player.x * size, player.y * size, size, size);
                 e.Graphics.FillRectangle(endGoal.color, endGoal.x * size, endGoal.y * size, size, size);
-
             }
             if (done)
             {

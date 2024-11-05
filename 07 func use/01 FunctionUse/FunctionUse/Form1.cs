@@ -14,28 +14,19 @@ namespace FunctionUse
 
             Pen lijnkleur = Pens.Black;
             Brush vulKleur = Brushes.Red;
-
-            //voorbeeld:
-
+            
             g.DrawRectangle(lijnkleur, 0, 0, 50, 50);
+            g.FillRectangle(vulKleur, 60, 60, 30, 30);
 
-            // 1) gebruik nu de FillRectangle function
-            //dit maak een vierkant  op 60,60 van 30 bij 30
-            g.??? (vulKleur, 60, 60, 30, 30);
-
-            // 2) maak nu zelf nog een vierkant, kies zelf waar en hoe groot
-            g.???
-
-
-            //we gaan nu een driehoek maken:
-
+           
+            g.FillRectangle(vulKleur, 100, 100, 40, 40);
             g.DrawLine(lijnkleur, 150, 50, 100, 0);
             g.DrawLine(lijnkleur, 100, 0, 50, 50);
 
-            g.??? //3) maak de driehoek af door nog een lijn tekenen
+            g.DrawLine(lijnkleur, 50, 50, 150, 50); 
 
-            //4) zoek nu zelf uit hoe je een circle tekent 
-            ????
+            
+            g.DrawEllipse(lijnkleur, 200, 200, 50, 50); 
         }
     }
 }

@@ -22,21 +22,17 @@ namespace SelectYourPower
         int currentWeapon = 0;
         Weapon[] weapons = new Weapon[4];
 
-
-
         public Form1()
         {
             InitializeComponent();
             DoubleBuffered = true;
             Rectangle[] weaponSprites = CreateWeaponSprites();
 
-
-            //1) zorg ervoor dat alle 4 de wapens verschillende plaatjes uit weaponSprites gebruiken
             weapons = new Weapon[4] {
-                new Weapon( "red bolt",weaponSprites[0]),
-                new Weapon( "lazer",weaponSprites[0]),
-                new Weapon( "piercing rect",weaponSprites[0]),
-                new Weapon( "green bolt",weaponSprites[0])
+                new Weapon("red bolt", weaponSprites[0]),
+                new Weapon("lazer", weaponSprites[1]),
+                new Weapon("piercing rect", weaponSprites[2]),
+                new Weapon("green bolt", weaponSprites[3])
             };
 
             KeyDown += Form1_KeyDown;
@@ -86,7 +82,6 @@ namespace SelectYourPower
 
         private void Form1_FormClosing(object? sender, FormClosingEventArgs e)
         {
-            //opruimen
             image.Dispose();
         }
 
@@ -106,9 +101,7 @@ namespace SelectYourPower
             }
 
             g.DrawString(weapons[currentWeapon].name, Font, Brushes.White, 0, 20);
-
         }
-
 
         internal void DoLogic(float frametime)
         {
@@ -116,13 +109,11 @@ namespace SelectYourPower
             {
                 Bullet bullet = bullets[i];
                 bullet.gameObject.position.x += bullet.speed * frametime;
-                if (ClientRectangle.Contains((int)bullet.gameObject.position.x, (int)bullet.gameObject.position.y) == false)//picked up by player 
+                if (ClientRectangle.Contains((int)bullet.gameObject.position.x, (int)bullet.gameObject.position.y) == false)
                 {
                     bullets.RemoveAt(i);
                 }
             }
         }
-
-
     }
 }
